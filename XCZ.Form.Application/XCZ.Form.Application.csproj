@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>XCZ</RootNamespace>
+    <AssemblyName>XCZ.FormManagement.Application</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.5.3</Version>
+    <Authors>XCZ、wycomcom、安眠药</Authors>
+    <Description>功能增强：生成配置可修改物理类型</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XCZ.Form.Application.Contracts\XCZ.Form.Application.Contracts.csproj" />
+    <ProjectReference Include="..\XCZ.Form.Core\XCZ.Form.Core.csproj" />
+  </ItemGroup>
+
+</Project>

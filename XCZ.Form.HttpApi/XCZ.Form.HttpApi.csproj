@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>XCZ</RootNamespace>
+    <AssemblyName>XCZ.FormManagement.HttpApi</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.5.1</Version>
+    <Authors>XCZ、wycomcom、安眠药</Authors>
+    <Description>
+      功能增强：生成配置可修改物理类型
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="4.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCZ.Form.Application.Contracts\XCZ.Form.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>XCZ</RootNamespace>
+    <AssemblyName>XCZ.FormManagement.EntityFrameworkCore</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.5.1</Version>
+    <Authors>XCZ、wycomcom、安眠药</Authors>
+    <Description>
+      功能增强：生成配置可修改物理类型
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCZ.Form.Domain\XCZ.Form.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

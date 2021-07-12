@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.Domain", "XCZ.Form.Domain\XCZ.Form.Domain.csproj", "{903858D0-0F22-42F3-9CEB-D402E03BD3B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.Application.Contracts", "XCZ.Form.Application.Contracts\XCZ.Form.Application.Contracts.csproj", "{CA40CF76-D9ED-4618-AB6B-407E7C071E6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.Application", "XCZ.Form.Application\XCZ.Form.Application.csproj", "{C77EBE81-5D44-4434-8259-D49568B992C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.EntityFrameworkCore", "XCZ.Form.EntityFrameworkCore\XCZ.Form.EntityFrameworkCore.csproj", "{07B3CCED-3572-4E28-A5BA-516C774CF8F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.HttpApi", "XCZ.Form.HttpApi\XCZ.Form.HttpApi.csproj", "{09BFC979-5C8C-4C30-A75F-A42CF912B4D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCZ.Form.Core", "XCZ.Form.Core\XCZ.Form.Core.csproj", "{550C1500-C533-4803-B117-82182C2FAFFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{903858D0-0F22-42F3-9CEB-D402E03BD3B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{903858D0-0F22-42F3-9CEB-D402E03BD3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{903858D0-0F22-42F3-9CEB-D402E03BD3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{903858D0-0F22-42F3-9CEB-D402E03BD3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA40CF76-D9ED-4618-AB6B-407E7C071E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA40CF76-D9ED-4618-AB6B-407E7C071E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA40CF76-D9ED-4618-AB6B-407E7C071E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA40CF76-D9ED-4618-AB6B-407E7C071E6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77EBE81-5D44-4434-8259-D49568B992C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77EBE81-5D44-4434-8259-D49568B992C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77EBE81-5D44-4434-8259-D49568B992C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77EBE81-5D44-4434-8259-D49568B992C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07B3CCED-3572-4E28-A5BA-516C774CF8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07B3CCED-3572-4E28-A5BA-516C774CF8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07B3CCED-3572-4E28-A5BA-516C774CF8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07B3CCED-3572-4E28-A5BA-516C774CF8F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09BFC979-5C8C-4C30-A75F-A42CF912B4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09BFC979-5C8C-4C30-A75F-A42CF912B4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09BFC979-5C8C-4C30-A75F-A42CF912B4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09BFC979-5C8C-4C30-A75F-A42CF912B4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550C1500-C533-4803-B117-82182C2FAFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550C1500-C533-4803-B117-82182C2FAFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550C1500-C533-4803-B117-82182C2FAFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550C1500-C533-4803-B117-82182C2FAFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19078473-1CA4-43C4-AA94-4977019D5A97}
+	EndGlobalSection
+EndGlobal
