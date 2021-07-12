@@ -6,10 +6,10 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.HttpApi</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.5.1</Version>
+    <Version>1.5.4</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>
-      功能增强：生成配置可修改物理类型
+      功能增强：添加索引配置
     </Description>
   </PropertyGroup>
 

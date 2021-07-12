@@ -3,7 +3,6 @@
                 b.ToTable("{TableName}");
 
                 b.ConfigureByConvention();
-
                 {Properties}
             });
 

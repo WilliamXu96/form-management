@@ -12,7 +12,6 @@ namespace {Namespace}.Models
     public class {EntityName}: AuditedAggregateRoot<Guid>, ISoftDelete, IMultiTenant
     {
         public Guid? TenantId { get; set; }
-        
         {AttributeList}
 		
 		public bool IsDeleted { get; set; }

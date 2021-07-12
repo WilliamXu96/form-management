@@ -1,5 +1,4 @@
 ﻿using System;
-using Volo.Abp;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
@@ -39,6 +38,8 @@ namespace XCZ.FormManagement
 
         public bool IsRequired { get; set; }
 
+        public bool IsIndex { get; set; }
+
         //public bool IsDefaultSort { get; set; }
 
         public bool IsSort { get; set; }
@@ -69,6 +70,7 @@ namespace XCZ.FormManagement
                          bool isRequire,
                          bool isSort,
                          bool disabled,
+                         bool isIndex = false,
                          string regx = null,
                          string options = null)
         {
@@ -87,6 +89,7 @@ namespace XCZ.FormManagement
             IsRequired = isRequire;
             IsSort = isSort;
             Disabled = disabled;
+            IsIndex = isIndex;
             Regx = regx;
             Options = options;
         }

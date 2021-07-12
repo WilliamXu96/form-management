@@ -27,6 +27,8 @@ namespace XCZ.FormManagement.Dto
 
         public bool IsRequired { get; set; }
 
+        public bool IsIndex { get; set; }
+
         public bool IsSort { get; set; }
 
         public bool Disabled { get; set; }

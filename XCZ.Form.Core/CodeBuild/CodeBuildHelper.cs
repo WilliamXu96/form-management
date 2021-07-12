@@ -37,7 +37,7 @@ namespace XCZ.CodeBuild
 
         public void Build()
         {
-            
+
             BuildDomainEntity();
             BuildDto();
             BuildAppService();
@@ -85,27 +85,35 @@ namespace XCZ.CodeBuild
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}{form.Namespace}DbContextModelCreatingExtensions.cs";
             var dbContent = FileHelper.ReadFile(path);
 
-            var PropertiesBuilder = new StringBuilder();
+            var propertiesBuilder = new StringBuilder();
+            var indexBuilder = new StringBuilder();
+
             foreach (var field in fields)
             {
                 if (field.DataType == "string" && (field.IsRequired || field.Maxlength.HasValue))
                 {
-                    PropertiesBuilder.Append($"b.Property(x => x.{field.FieldName.FirstCharToUpper()})");
+                    propertiesBuilder.Append($"{sysLineFeed}                b.Property(x => x.{field.FieldName.FirstCharToUpper()})");
                     if (field.IsRequired)
                     {
-                        PropertiesBuilder.Append(".IsRequired()");
+                        propertiesBuilder.Append(".IsRequired()");
                     }
                     if (field.Maxlength.HasValue)
                     {
-                        PropertiesBuilder.Append($".HasMaxLength({field.Maxlength})");
+                        propertiesBuilder.Append($".HasMaxLength({field.Maxlength})");
                     }
-                    PropertiesBuilder.Append($";{sysLineFeed}{sysLineFeed}        ");
+                    propertiesBuilder.Append($";");
+                }
+
+                if (field.IsIndex)
+                {
+                    indexBuilder.Append($"{sysLineFeed}                b.HasIndex(x => x.{field.FieldName.FirstCharToUpper()});{sysLineFeed}");
                 }
             }
+
             var template = CodeBuildTemplate.DbContextModelCreatingExtensionsTemplate
                                             .Replace("{EntityName}", form.EntityName.FirstCharToUpper())
                                             .Replace("{TableName}", form.TableName)
-                                            .Replace("{Properties}", PropertiesBuilder.ToString());
+                                            .Replace("{Properties}", propertiesBuilder.ToString() + indexBuilder.ToString());
             dbContent = dbContent.Replace("//Code generation...", template);
             FileHelper.WriteFile($@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}", $"{form.Namespace}DbContextModelCreatingExtensions.cs", dbContent);
         }

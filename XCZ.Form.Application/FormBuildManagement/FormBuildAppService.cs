@@ -37,19 +37,12 @@ namespace XCZ.FormBuildManagement
         public async Task Build(Guid id)
         {
             if (!_hostingEnvironment.IsDevelopment())
-            {
                 throw new BusinessException("仅限开发环境使用！");
-            }
-            else
-            {
-                var form = await _formRep.GetAsync(id);
-                var fields = await _fieldRep.Where(_ => _.FormId == form.Id).ToListAsync();
-                var parentPath = new DirectoryInfo(_hostingEnvironment.ContentRootPath).Parent.FullName;
-                //form.Namespace = "Business";
-                new CodeBuild.CodeBuildHelper(form, fields, parentPath,SystemSymbolHelper.GetSysPathSeparator(),SystemSymbolHelper.GetSysLineFeed()).Build();
 
-            }
-          
+            var form = await _formRep.GetAsync(id);
+            var fields = await _fieldRep.Where(_ => _.FormId == form.Id).ToListAsync();
+            var parentPath = new DirectoryInfo(_hostingEnvironment.ContentRootPath).Parent.FullName;
+            new CodeBuild.CodeBuildHelper(form, fields, parentPath, SystemSymbolHelper.GetSysPathSeparator(), SystemSymbolHelper.GetSysLineFeed()).Build();
         }
 
         public async Task<FormBuildDto> Get(Guid id)
@@ -103,7 +96,8 @@ namespace XCZ.FormBuildManagement
                                                            field.IsReadonly,
                                                            field.IsRequired,
                                                            field.IsSort,
-                                                           field.Disabled
+                                                           field.Disabled,
+                                                           field.IsIndex
                                                            //field.Regx,
                                                            //field.Options
                                                            ));
@@ -113,5 +107,5 @@ namespace XCZ.FormBuildManagement
         }
 
     }
-  
+
 }
