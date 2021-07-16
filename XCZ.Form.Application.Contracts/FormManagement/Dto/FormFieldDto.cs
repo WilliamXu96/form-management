@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
 
 namespace XCZ.FormManagement.Dto
 {
-    public class FormFieldDto : EntityDto<int>
+    public class FormFieldDto : EntityDto<Guid>
     {
         public string FieldType { get; set; }
 

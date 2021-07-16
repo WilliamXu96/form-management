@@ -21,12 +21,12 @@ namespace XCZ.FormBuildManagement
     public class FormBuildAppService : ApplicationService, IFormBuildAppService
     {
         private readonly IRepository<Form, Guid> _formRep;
-        private readonly IRepository<FormField, int> _fieldRep;
+        private readonly IRepository<FormField, Guid> _fieldRep;
         private IWebHostEnvironment _hostingEnvironment;
 
         public FormBuildAppService(
             IRepository<Form, Guid> formRep,
-            IRepository<FormField, int> columnRep,
+            IRepository<FormField, Guid> columnRep,
             IWebHostEnvironment hostingEnvironment)
         {
             _formRep = formRep;
@@ -82,25 +82,26 @@ namespace XCZ.FormBuildManagement
             await _fieldRep.DeleteAsync(_ => _.FormId == id);
             foreach (var field in input.Fields)
             {
-                await _fieldRep.InsertAsync(new FormField(CurrentTenant.Id,
-                                                           id,
-                                                           field.FieldType,
-                                                           field.DataType,
-                                                           field.FieldName,
-                                                           field.Label,
-                                                           field.Placeholder,
-                                                           field.DefaultValue,
-                                                           field.FieldOrder,
-                                                           field.Icon,
-                                                           field.Maxlength,
-                                                           field.IsReadonly,
-                                                           field.IsRequired,
-                                                           field.IsSort,
-                                                           field.Disabled,
-                                                           field.IsIndex
-                                                           //field.Regx,
-                                                           //field.Options
-                                                           ));
+                await _fieldRep.InsertAsync(new FormField(GuidGenerator.Create())
+                {
+                    TenantId = CurrentTenant.Id,
+                    FormId = id,
+                    FieldType = field.FieldType,
+                    DataType = field.DataType,
+                    FieldName = field.FieldName,
+                    Label = field.Label,
+                    Placeholder = field.Placeholder,
+                    DefaultValue = field.DefaultValue,
+                    FieldOrder = field.FieldOrder,
+                    Icon = field.Icon,
+                    Maxlength = field.Maxlength,
+                    IsReadonly = field.IsReadonly,
+                    IsRequired = field.IsRequired,
+                    IsIndex = field.IsIndex,
+                    IsSort = field.IsSort,
+                    Disabled = field.Disabled,
+
+                });
             }
 
             return ObjectMapper.Map<Form, FormBuildDto>(form);

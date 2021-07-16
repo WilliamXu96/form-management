@@ -1,8 +1,9 @@
-﻿using Volo.Abp.Application.Dtos;
+﻿using System;
+using Volo.Abp.Application.Dtos;
 
 namespace XCZ.FormManagement.Dto
 {
-    public class FormFieldListDto : EntityDto<int>
+    public class FormFieldListDto : EntityDto<Guid>
     {
         public string FieldName { get; set; }
 

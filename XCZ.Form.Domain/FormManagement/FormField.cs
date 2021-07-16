@@ -4,7 +4,7 @@ using Volo.Abp.MultiTenancy;
 
 namespace XCZ.FormManagement
 {
-    public class FormField : AggregateRoot<int>, IMultiTenant
+    public class FormField : AggregateRoot<Guid>, IMultiTenant
     {
         public Guid? TenantId { get; set; }
 
@@ -50,48 +50,9 @@ namespace XCZ.FormManagement
 
         public string Options { get; set; }
 
-        protected FormField()
+        public FormField(Guid id) : base(id)
         {
 
-        }
-
-        public FormField(Guid? tenantId,
-                         Guid formId,
-                         string fieldType,
-                         string dataType,
-                         string fieldName,
-                         string label,
-                         string placeholder,
-                         string defaultValue,
-                         int fieldOrder,
-                         string icon,
-                         int? maxlength,
-                         bool isReadonly,
-                         bool isRequire,
-                         bool isSort,
-                         bool disabled,
-                         bool isIndex = false,
-                         string regx = null,
-                         string options = null)
-        {
-            TenantId = tenantId;
-            FormId = formId;
-            FieldType = fieldType;
-            DataType = dataType;
-            FieldName = fieldName;
-            Label = label;
-            Placeholder = placeholder;
-            DefaultValue = defaultValue;
-            FieldOrder = fieldOrder;
-            Icon = icon;
-            Maxlength = maxlength;
-            IsReadonly = isReadonly;
-            IsRequired = isRequire;
-            IsSort = isSort;
-            Disabled = disabled;
-            IsIndex = isIndex;
-            Regx = regx;
-            Options = options;
         }
     }
 }

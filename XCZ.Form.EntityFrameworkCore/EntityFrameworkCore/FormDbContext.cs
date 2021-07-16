@@ -5,7 +5,7 @@ using XCZ.FormManagement;
 
 namespace XCZ.EntityFrameworkCore
 {
-    [ConnectionStringName("Business")]
+    //[ConnectionStringName("Business")]
     public class FormDbContext : AbpDbContext<FormDbContext>, IFormDbContext
     {
         public DbSet<Form> Forms { get; set; }

@@ -15,11 +15,11 @@ namespace XCZ.FormManagement
     public class FormAppService : ApplicationService, IFormAppService
     {
         private readonly IRepository<Form, Guid> _formRep;
-        private readonly IRepository<FormField, int> _columnRep;
+        private readonly IRepository<FormField, Guid> _columnRep;
 
         public FormAppService(
             IRepository<Form, Guid> formRep,
-            IRepository<FormField, int> columnRep)
+            IRepository<FormField, Guid> columnRep)
         {
             _formRep = formRep;
             _columnRep = columnRep;
@@ -38,24 +38,26 @@ namespace XCZ.FormManagement
 
             foreach (var field in input.Fields)
             {
-                await _columnRep.InsertAsync(new FormField(CurrentTenant.Id,
-                                                           id,
-                                                           field.FieldType,
-                                                           StringExtension.ToColumnType(field.FieldType),
-                                                           field.FieldName,
-                                                           field.Label,
-                                                           field.Placeholder,
-                                                           field.DefaultValue,
-                                                           field.FieldOrder,
-                                                           field.Icon,
-                                                           field.Maxlength,
-                                                           field.IsReadonly,
-                                                           field.IsRequired,
-                                                           field.IsSort,
-                                                           field.Disabled
-                                                           //field.Regx,
-                                                           //field.Options
-                                                           ));
+                await _columnRep.InsertAsync(new FormField(GuidGenerator.Create())
+                {
+                    TenantId = CurrentTenant.Id,
+                    FormId = id,
+                    FieldType = field.FieldType,
+                    DataType = StringExtension.ToColumnType(field.FieldType),
+                    FieldName = field.FieldName,
+                    Label = field.Label,
+                    Placeholder = field.Placeholder,
+                    DefaultValue = field.DefaultValue,
+                    FieldOrder = field.FieldOrder,
+                    Icon = field.Icon,
+                    Maxlength = field.Maxlength,
+                    IsReadonly = field.IsReadonly,
+                    IsRequired = field.IsRequired,
+                    IsIndex = field.IsIndex,
+                    IsSort = field.IsSort,
+                    Disabled = field.Disabled,
+
+                });
             }
 
             return ObjectMapper.Map<Form, FormDto>(form);
@@ -100,30 +102,34 @@ namespace XCZ.FormManagement
         {
             var form = await _formRep.GetAsync(id);
             form.FormName = input.FormName;
+            form.DisplayName = input.DisplayName;
             form.Api = input.Api;
             form.Disabled = input.Disabled;
+            form.Description = input.Description;
 
             await _columnRep.DeleteAsync(_ => _.FormId == id);
             foreach (var field in input.Fields)
             {
-                await _columnRep.InsertAsync(new FormField(CurrentTenant.Id,
-                                                           id,
-                                                           field.FieldType,
-                                                           StringExtension.ToColumnType(field.FieldType),
-                                                           field.FieldName,
-                                                           field.Label,
-                                                           field.Placeholder,
-                                                           field.DefaultValue,
-                                                           field.FieldOrder,
-                                                           field.Icon,
-                                                           field.Maxlength,
-                                                           field.IsReadonly,
-                                                           field.IsRequired,
-                                                           field.IsSort,
-                                                           field.Disabled
-                                                           //field.Regx,
-                                                           //field.Options
-                                                           ));
+                await _columnRep.InsertAsync(new FormField(GuidGenerator.Create())
+                {
+                    TenantId = CurrentTenant.Id,
+                    FormId = id,
+                    FieldType = field.FieldType,
+                    DataType = StringExtension.ToColumnType(field.FieldType),
+                    FieldName = field.FieldName,
+                    Label = field.Label,
+                    Placeholder = field.Placeholder,
+                    DefaultValue = field.DefaultValue,
+                    FieldOrder = field.FieldOrder,
+                    Icon = field.Icon,
+                    Maxlength = field.Maxlength,
+                    IsReadonly = field.IsReadonly,
+                    IsRequired = field.IsRequired,
+                    IsIndex = field.IsIndex,
+                    IsSort = field.IsSort,
+                    Disabled = field.Disabled,
+
+                });
             }
 
             return ObjectMapper.Map<Form, FormDto>(form);
