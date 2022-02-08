@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.Application</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.5.5</Version>
+    <Version>1.6.0</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>功能增强：添加索引配置</Description>
   </PropertyGroup>

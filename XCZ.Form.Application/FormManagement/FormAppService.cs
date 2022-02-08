@@ -75,7 +75,7 @@ namespace XCZ.FormManagement
         public async Task<FormDto> Get(Guid id)
         {
             var form = await _formRep.GetAsync(id);
-            var columns = await _columnRep.Where(_ => _.FormId == id)
+            var columns = await (await _columnRep.GetQueryableAsync()).Where(_ => _.FormId == id)
                                           .OrderBy(_ => _.FieldOrder)
                                           .ToListAsync();
 
@@ -86,7 +86,7 @@ namespace XCZ.FormManagement
 
         public async Task<PagedResultDto<FormDto>> GetAll(GetFormInputDto input)
         {
-            var query = _formRep.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), _ => _.FormName.Contains(input.Filter));
+            var query = (await _formRep.GetQueryableAsync()).WhereIf(!string.IsNullOrWhiteSpace(input.Filter), _ => _.FormName.Contains(input.Filter));
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(input.Sorting ?? "FormName")
@@ -137,7 +137,7 @@ namespace XCZ.FormManagement
 
         public async Task<ListResultDto<FormListDto>> GetAllList()
         {
-            var list = await (from f in _formRep
+            var list = await (from f in (await _formRep.GetQueryableAsync())
                               select new FormListDto
                               {
                                   Id = f.Id,
@@ -149,7 +149,7 @@ namespace XCZ.FormManagement
 
         public async Task<ListResultDto<FormFieldListDto>> GetField(Guid id)
         {
-            var list = await (from c in _columnRep
+            var list = await (from c in (await _columnRep.GetQueryableAsync())
                               where c.FormId == id
                               select new FormFieldListDto
                               {

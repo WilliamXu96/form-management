@@ -40,7 +40,7 @@ namespace XCZ.FormBuildManagement
                 throw new BusinessException("仅限开发环境使用！");
 
             var form = await _formRep.GetAsync(id);
-            var fields = await _fieldRep.Where(_ => _.FormId == form.Id).ToListAsync();
+            var fields = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == form.Id).ToListAsync();
             var parentPath = new DirectoryInfo(_hostingEnvironment.ContentRootPath).Parent.FullName;
             new CodeBuild.CodeBuildHelper(form, fields, parentPath, SystemSymbolHelper.GetSysPathSeparator(), SystemSymbolHelper.GetSysLineFeed()).Build();
         }
@@ -48,7 +48,7 @@ namespace XCZ.FormBuildManagement
         public async Task<FormBuildDto> Get(Guid id)
         {
             var form = await _formRep.GetAsync(id);
-            var columns = await _fieldRep.Where(_ => _.FormId == id)
+            var columns = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == id)
                                          .OrderBy(_ => _.FieldOrder)
                                          .ToListAsync();
 
@@ -59,7 +59,7 @@ namespace XCZ.FormBuildManagement
 
         public async Task<PagedResultDto<FormBuildDto>> GetAll(GetFormInputDto input)
         {
-            var query = _formRep.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), _ => _.FormName.Contains(input.Filter));
+            var query = (await _formRep.GetQueryableAsync()).WhereIf(!string.IsNullOrWhiteSpace(input.Filter), _ => _.FormName.Contains(input.Filter));
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(input.Sorting ?? "FormName")
