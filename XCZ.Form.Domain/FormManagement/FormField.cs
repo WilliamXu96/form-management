@@ -54,7 +54,7 @@ namespace XCZ.FormManagement
         /// 布局时表单占用的栅格数
         /// XiangMingHuii
         /// </summary>
-        public int LayoutSpan { get; set; }
+        public int Span { get; set; }
 
         public FormField(Guid id) : base(id)
         {

@@ -60,7 +60,8 @@ namespace XCZ.FormManagement
                     IsIndex = field.IsIndex,
                     IsSort = field.IsSort,
                     Disabled = field.Disabled,
-
+                    Span = field.Span,
+                    Regx = field.Regx
                 });
             }
 
@@ -134,7 +135,8 @@ namespace XCZ.FormManagement
                     IsIndex = field.IsIndex,
                     IsSort = field.IsSort,
                     Disabled = field.Disabled,
-
+                    Span = field.Span,
+                    Regx = field.Regx
                 });
             }
 

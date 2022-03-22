@@ -70,7 +70,12 @@ namespace XCZ.FormManagement.Dto
         /// 布局时表单占用的栅格数
         /// XiangMingHuii
         /// </summary>
-        public int LayoutSpan { get; set; }
+        public int Span { get; set; }
+        /// <summary>
+        /// 正则表达式
+        /// XiangMingHuii
+        /// </summary>
+        public string Regx { get; set; }
     }
 
     public class FieldReg
