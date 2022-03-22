@@ -2,7 +2,7 @@
 
 namespace XCZ.Localization
 {
-    [LocalizationResourceName("FormManagement")]
+    [LocalizationResourceName("Form")]
     public class FormResource
     {
     }

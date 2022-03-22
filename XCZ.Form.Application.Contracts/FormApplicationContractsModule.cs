@@ -10,7 +10,6 @@ using XCZ.Localization;
 namespace XCZ
 {
     [DependsOn(
-        typeof(AbpValidationModule),
         typeof(AbpLocalizationModule),
         typeof(AbpDddApplicationModule),
         typeof(AbpPermissionManagementApplicationContractsModule)
@@ -21,7 +20,7 @@ namespace XCZ
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<FormApplicationContractsModule>();
+                options.FileSets.AddEmbedded<FormApplicationContractsModule>("XCZ");
             });
 
             Configure<AbpLocalizationOptions>(options =>
@@ -30,8 +29,6 @@ namespace XCZ
                     .Add<FormResource>("zh-Hans")
                     .AddBaseTypes(typeof(AbpValidationResource))
                     .AddVirtualJson("/Localization");
-
-                options.DefaultResourceType = typeof(FormResource);
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -15,9 +16,11 @@ using XCZ.Extensions;
 using XCZ.FormBuildManagement.Dto;
 using XCZ.FormManagement;
 using XCZ.FormManagement.Dto;
+using XCZ.Permissions;
 
 namespace XCZ.FormBuildManagement
 {
+    [Authorize(FormPermissions.FormBuild.Default)]
     public class FormBuildAppService : ApplicationService, IFormBuildAppService
     {
         private readonly IRepository<Form, Guid> _formRep;
@@ -34,6 +37,7 @@ namespace XCZ.FormBuildManagement
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [Authorize(FormPermissions.FormBuild.Build)]
         public async Task Build(Guid id)
         {
             if (!_hostingEnvironment.IsDevelopment())
@@ -71,6 +75,7 @@ namespace XCZ.FormBuildManagement
             return new PagedResultDto<FormBuildDto>(totalCount, dto);
         }
 
+        [Authorize(FormPermissions.FormBuild.Update)]
         public async Task<FormBuildDto> Update(Guid id, UpdateFormDto input)
         {
             var form = await _formRep.GetAsync(id);

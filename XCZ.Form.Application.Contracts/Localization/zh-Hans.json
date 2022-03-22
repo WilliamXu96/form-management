@@ -7,6 +7,9 @@
     "Edit": "修改",
     "Delete": "删除",
     "Create": "新增",
-    "Form": "业务系统"
+    "FormManagement": "表单管理",
+    "Form": "表单",
+    "FormBuild": "代码生成",
+    "Build": "生成"
   }
 }

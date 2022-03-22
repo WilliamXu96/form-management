@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using XCZ.Extensions;
 using XCZ.FormManagement.Dto;
+using XCZ.Permissions;
 
 namespace XCZ.FormManagement
 {
+    [Authorize(FormPermissions.Form.Default)]
     public class FormAppService : ApplicationService, IFormAppService
     {
         private readonly IRepository<Form, Guid> _formRep;
@@ -25,6 +28,7 @@ namespace XCZ.FormManagement
             _columnRep = columnRep;
         }
 
+        [Authorize(FormPermissions.Form.Create)]
         public async Task<FormDto> Create(CreateOrUpdateFormDto input)
         {
             var id = GuidGenerator.Create();
@@ -63,6 +67,7 @@ namespace XCZ.FormManagement
             return ObjectMapper.Map<Form, FormDto>(form);
         }
 
+        [Authorize(FormPermissions.Form.Delete)]
         public async Task Delete(List<Guid> ids)
         {
             foreach (var id in ids)
@@ -98,6 +103,7 @@ namespace XCZ.FormManagement
             return new PagedResultDto<FormDto>(totalCount, dto);
         }
 
+        [Authorize(FormPermissions.Form.Update)]
         public async Task<FormDto> Update(Guid id, CreateOrUpdateFormDto input)
         {
             var form = await _formRep.GetAsync(id);
