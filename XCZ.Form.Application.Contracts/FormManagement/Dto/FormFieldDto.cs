@@ -37,5 +37,11 @@ namespace XCZ.FormManagement.Dto
         public List<FieldReg> RegList { get; set; }
 
         public List<FieldOption> Options { get; set; }
+
+        /// <summary>
+        /// 布局时表单占用的栅格数
+        /// XiangMingHuii
+        /// </summary>
+        public int LayoutSpan { get; set; }
     }
 }

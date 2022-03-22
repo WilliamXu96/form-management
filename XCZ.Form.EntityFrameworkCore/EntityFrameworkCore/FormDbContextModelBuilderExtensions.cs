@@ -42,6 +42,7 @@ namespace XCZ.EntityFrameworkCore
                 b.Property(x => x.Placeholder).HasMaxLength(50);
                 b.Property(x => x.DefaultValue).HasMaxLength(256);
                 b.Property(x => x.Icon).HasMaxLength(50);
+                b.Property(x => x.LayoutSpan).HasMaxLength(24);
                 b.Property(x => x.IsIndex).HasDefaultValue(false);
             });
         }

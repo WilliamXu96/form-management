@@ -50,6 +50,12 @@ namespace XCZ.FormManagement
 
         public string Options { get; set; }
 
+        /// <summary>
+        /// 布局时表单占用的栅格数
+        /// XiangMingHuii
+        /// </summary>
+        public int LayoutSpan { get; set; }
+
         public FormField(Guid id) : base(id)
         {
 
