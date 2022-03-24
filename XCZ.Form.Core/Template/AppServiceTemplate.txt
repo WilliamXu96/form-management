@@ -17,6 +17,7 @@ namespace {Namespace}.{EntityName}Management
     [Authorize({Namespace}Permissions.{EntityName}.Default)]
     public class {EntityName}AppService : ApplicationService,I{EntityName}AppService
     {
+        private const string FormName = "{FormName}";
         private IRepository<{EntityName}, Guid> _repository;
 
         public {EntityName}AppService(
@@ -36,7 +37,7 @@ namespace {Namespace}.{EntityName}Management
 
         public async Task<PagedResultDto<{EntityName}Dto>> GetAll(Get{EntityName}InputDto input)
         {
-            var query = _repository.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), a => a.Name.Contains(input.Filter));
+            var query = (await _repository.GetQueryableAsync()).WhereIf(!string.IsNullOrWhiteSpace(input.Filter), a => a.Name.Contains(input.Filter));
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(input.Sorting ?? "Id")

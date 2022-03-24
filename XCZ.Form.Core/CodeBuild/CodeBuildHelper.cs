@@ -138,7 +138,8 @@ namespace XCZ.CodeBuild
             string tempContent = content
                                  .Replace("{DisplayName}", form.DisplayName)
                                  .Replace("{Namespace}", form.Namespace.FirstCharToUpper())
-                                 .Replace("{EntityName}", form.EntityName.FirstCharToUpper());
+                                 .Replace("{EntityName}", form.EntityName.FirstCharToUpper())
+                                 .Replace("{FormName}", form.FormName);
             if (hasAtrrbute)
             {
                 StringBuilder AttributeBuilder = GetAttributes();
