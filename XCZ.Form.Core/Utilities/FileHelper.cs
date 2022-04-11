@@ -9,7 +9,7 @@ namespace XCZ.Utilities
 {
     public class FileHelper
     {
-        private static object _filePathObj = new object();
+        //private static object _filePathObj = new object();
 
         /// <summary>
         /// 通过迭代器读取平面文件行内容(必须是带有\r\n换行的文件,百万行以上的内容读取效率存在问题,适用于100M左右文件，行100W内，超出的会有卡顿)

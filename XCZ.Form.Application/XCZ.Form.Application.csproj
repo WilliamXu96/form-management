@@ -5,9 +5,9 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.Application</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.6.5</Version>
+    <Version>1.6.7</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
-    <Description>功能增强：增加表单排版(span)字段，提供者：XiangMingHuii</Description>
+    <Description>功能改进：代码生成使用命名空间非强制</Description>
   </PropertyGroup>
 
   <ItemGroup>
