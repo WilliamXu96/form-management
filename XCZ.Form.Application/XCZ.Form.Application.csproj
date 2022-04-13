@@ -5,13 +5,14 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.Application</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.6.7</Version>
+    <Version>2.0.1</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
-    <Description>功能改进：代码生成使用命名空间非强制</Description>
+    <Description>功能改进：非Business命名空间，自动生成新路径代码文件</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+	  <PackageReference Include="Volo.Abp.Ddd.Application" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XCZ.Form.Application.Contracts\XCZ.Form.Application.Contracts.csproj" />

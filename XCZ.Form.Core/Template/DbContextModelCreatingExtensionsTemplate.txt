@@ -1,0 +1,17 @@
+﻿using {Namespace}.Models;
+using Microsoft.EntityFrameworkCore;
+using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
+
+namespace {Namespace}.EntityFrameworkCore
+{
+    public static class {Namespace}DbContextModelCreatingExtensions
+    {
+        public static void Configure{Namespace}(this ModelBuilder builder)
+        {
+            Check.NotNull(builder, nameof(builder));
+
+            //Code generation...
+        }
+    }
+}

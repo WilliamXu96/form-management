@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace XCZ.FormManagement.Core.CodeBuild
 {
     public class CodeBuildTemplate
     {
-
+        public static string PermissionClassTemplate { get => GetResourceName("PermissionsTemplate"); }
+        public static string PermissionDefinitionProviderClassTemplate { get => GetResourceName("PermissionDefinitionProviderTemplate"); }
+        public static string DbContextClassTemplate { get => GetResourceName("DbContextTemplate"); }
+        public static string DbContextModelCreatingExtensionsClassTemplate { get => GetResourceName("DbContextModelCreatingExtensionsTemplate"); }
         public static string ApplicationSverviceTemplate { get => GetResourceName($"AppServiceTemplate");  }
         public static string IApplicationSverviceTemplate { get => GetResourceName($"IAppServiceTemplate"); }
         public static string DomianModelTemplate { get => GetResourceName($"DomianModelTemplate"); }

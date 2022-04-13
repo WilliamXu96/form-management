@@ -1,5 +1,4 @@
-﻿using Volo.Abp.Application;
-using Volo.Abp.Localization;
+﻿using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Validation.Localization;
@@ -10,7 +9,6 @@ namespace XCZ
 {
     [DependsOn(
         typeof(AbpLocalizationModule),
-        typeof(AbpDddApplicationModule),
         typeof(AbpPermissionManagementApplicationContractsModule)
     )]
     public class FormApplicationContractsModule : AbpModule

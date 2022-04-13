@@ -53,10 +53,12 @@ namespace XCZ.CodeBuild
 
         private void BuildPermission()
         {
+            string permissionContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.Application.Contracts{sysPathSeparator}Permissions{sysPathSeparator}{form.Namespace}Permissions.cs";
-            if (!FileHelper.DirectoryExists(path)) return;
-            //TODO：找不到路径生成新文件
-            var permissionContent = FileHelper.ReadFile(path);
+            if (!FileHelper.DirectoryExists(path))
+                permissionContent = CodeBuildTemplate.PermissionClassTemplate.Replace("{Namespace}", form.Namespace);
+            else
+                permissionContent = FileHelper.ReadFile(path);
             var template = CodeBuildTemplate.PermissionTemplate.Replace("{EntityName}", form.EntityName.FirstCharToUpper())
                                                                .Replace("{Namespace}", form.Namespace);
             permissionContent = permissionContent.Replace("//Code generation...", template);
@@ -65,10 +67,12 @@ namespace XCZ.CodeBuild
 
         private void BuildPermissionDefinitionProvider()
         {
+            string permissionContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.Application.Contracts{sysPathSeparator}Permissions{sysPathSeparator}{form.Namespace}PermissionDefinitionProvider.cs";
-            if (!FileHelper.DirectoryExists(path)) return;
-            //TODO：找不到路径生成新文件
-            var permissionContent = FileHelper.ReadFile(path);
+            if (!FileHelper.DirectoryExists(path))
+                permissionContent = CodeBuildTemplate.PermissionDefinitionProviderClassTemplate.Replace("{Namespace}", form.Namespace);
+            else
+                permissionContent = FileHelper.ReadFile(path);
             var template = CodeBuildTemplate.PermissionDefinitionProviderTemplate.Replace("{EntityName}", form.EntityName.FirstCharToUpper())
                                                                                  .Replace("{Namespace}", form.Namespace);
             permissionContent = permissionContent.Replace("//Code generation...", template);
@@ -77,10 +81,12 @@ namespace XCZ.CodeBuild
 
         private void BuildDbContext()
         {
+            string dbContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}{form.Namespace}DbContext.cs";
-            if (!FileHelper.DirectoryExists(path)) return;
-            //TODO：找不到路径生成新文件
-            var dbContent = FileHelper.ReadFile(path);
+            if (!FileHelper.DirectoryExists(path))
+                dbContent = CodeBuildTemplate.DbContextClassTemplate.Replace("{Namespace}", form.Namespace);
+            else
+                dbContent = FileHelper.ReadFile(path);
             var template = CodeBuildTemplate.DbContextTemplate.Replace("{EntityName}", form.EntityName.FirstCharToUpper());
             dbContent = dbContent.Replace("//Code generation...", template);
             FileHelper.WriteFile($@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}", $"{form.Namespace}DbContext.cs", dbContent);
@@ -88,10 +94,12 @@ namespace XCZ.CodeBuild
 
         private void BuildDbContextModelCreatingExtensions()
         {
+            string dbContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}{form.Namespace}DbContextModelCreatingExtensions.cs";
-            if (!FileHelper.DirectoryExists(path)) return;
-            //TODO：找不到路径生成新文件
-            var dbContent = FileHelper.ReadFile(path);
+            if (!FileHelper.DirectoryExists(path))
+                dbContent = CodeBuildTemplate.DbContextModelCreatingExtensionsClassTemplate.Replace("{Namespace}", form.Namespace);
+            else
+                dbContent = FileHelper.ReadFile(path);
 
             var propertiesBuilder = new StringBuilder();
             var indexBuilder = new StringBuilder();

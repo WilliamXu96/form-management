@@ -5,15 +5,17 @@
     <AssemblyName>XCZ.FormManagement.Core</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RootNamespace>XCZ.FormManagement.Core</RootNamespace>
-    <Version>1.6.7</Version>
+    <Version>2.0.1</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
-    <Description>功能增强：添加索引配置</Description>
+    <Description>功能增强：非Business命名空间，自动生成新路径代码文件</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Template\AppServiceTemplate.txt" />
     <None Remove="Template\AutoMapperProfileTemplate.txt" />
     <None Remove="Template\ControllerTemplate.txt" />
+    <None Remove="Template\DbContextModelCreatingExtensionsTemplate.txt" />
+    <None Remove="Template\DbContextTemplate.txt" />
     <None Remove="Template\DomianModelTemplate.txt" />
     <None Remove="Template\Dto\CreateOrUpdateDtoTemplate.txt" />
     <None Remove="Template\Dto\InputDtoTemplate.txt" />
@@ -21,6 +23,8 @@
     <None Remove="Template\EF\DbContextModelCreatingExtensionsTemplate.txt" />
     <None Remove="Template\EF\DbContextTemplate.txt" />
     <None Remove="Template\IAppServiceTemplate.txt" />
+    <None Remove="Template\PermissionDefinitionProviderTemplate.txt" />
+    <None Remove="Template\PermissionsTemplate.txt" />
     <None Remove="Template\Permissions\PermissionDefinitionProviderTemplate.txt" />
     <None Remove="Template\Permissions\PermissionsTemplate.txt" />
   </ItemGroup>
@@ -29,6 +33,8 @@
     <EmbeddedResource Include="Template\AppServiceTemplate.txt" />
     <EmbeddedResource Include="Template\AutoMapperProfileTemplate.txt" />
     <EmbeddedResource Include="Template\ControllerTemplate.txt" />
+    <EmbeddedResource Include="Template\DbContextModelCreatingExtensionsTemplate.txt" />
+    <EmbeddedResource Include="Template\DbContextTemplate.txt" />
     <EmbeddedResource Include="Template\DomianModelTemplate.txt" />
     <EmbeddedResource Include="Template\Dto\CreateOrUpdateDtoTemplate.txt" />
     <EmbeddedResource Include="Template\Dto\InputDtoTemplate.txt" />
@@ -36,6 +42,8 @@
     <EmbeddedResource Include="Template\EF\DbContextModelCreatingExtensionsTemplate.txt" />
     <EmbeddedResource Include="Template\EF\DbContextTemplate.txt" />
     <EmbeddedResource Include="Template\IAppServiceTemplate.txt" />
+    <EmbeddedResource Include="Template\PermissionDefinitionProviderTemplate.txt" />
+    <EmbeddedResource Include="Template\PermissionsTemplate.txt" />
     <EmbeddedResource Include="Template\Permissions\PermissionDefinitionProviderTemplate.txt" />
     <EmbeddedResource Include="Template\Permissions\PermissionsTemplate.txt" />
   </ItemGroup>

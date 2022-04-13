@@ -1,0 +1,23 @@
+﻿using {Namespace}.Localization;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.Localization;
+using Volo.Abp.MultiTenancy;
+
+namespace {Namespace}.Permissions
+{
+    public class {Namespace}PermissionDefinitionProvider: PermissionDefinitionProvider
+    {
+
+        public override void Define(IPermissionDefinitionContext context)
+        {
+            var {Namespace} = context.AddGroup({Namespace}Permissions.{Namespace}, L("{Namespace}"), MultiTenancySides.Both);
+
+            //Code generation...
+        }
+
+        private static LocalizableString L(string name)
+        {
+            return LocalizableString.Create<{Namespace}Resource>(name);
+        }
+    }
+}

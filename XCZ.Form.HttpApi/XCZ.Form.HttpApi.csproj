@@ -5,10 +5,10 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.HttpApi</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.6.7</Version>
+    <Version>2.0.1</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>
-		功能增强：增加表单排版(span)字段，提供者：XiangMingHuii
+		功能增强：非Business命名空间，自动生成新路径代码
 	</Description>
   </PropertyGroup>
 

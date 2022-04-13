@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace {Namespace}.Permissions
+{
+    public static class {Namespace}Permissions
+    {
+        public const string {Namespace} = "{Namespace}";
+
+        //Code generation...
+    }
+}
