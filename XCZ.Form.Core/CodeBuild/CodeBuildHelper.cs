@@ -55,7 +55,7 @@ namespace XCZ.CodeBuild
         {
             string permissionContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.Application.Contracts{sysPathSeparator}Permissions{sysPathSeparator}{form.Namespace}Permissions.cs";
-            if (!FileHelper.DirectoryExists(path))
+            if (!FileHelper.FileExists(path))
                 permissionContent = CodeBuildTemplate.PermissionClassTemplate.Replace("{Namespace}", form.Namespace);
             else
                 permissionContent = FileHelper.ReadFile(path);
@@ -69,7 +69,7 @@ namespace XCZ.CodeBuild
         {
             string permissionContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.Application.Contracts{sysPathSeparator}Permissions{sysPathSeparator}{form.Namespace}PermissionDefinitionProvider.cs";
-            if (!FileHelper.DirectoryExists(path))
+            if (!FileHelper.FileExists(path))
                 permissionContent = CodeBuildTemplate.PermissionDefinitionProviderClassTemplate.Replace("{Namespace}", form.Namespace);
             else
                 permissionContent = FileHelper.ReadFile(path);
@@ -83,7 +83,7 @@ namespace XCZ.CodeBuild
         {
             string dbContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}{form.Namespace}DbContext.cs";
-            if (!FileHelper.DirectoryExists(path))
+            if (!FileHelper.FileExists(path))
                 dbContent = CodeBuildTemplate.DbContextClassTemplate.Replace("{Namespace}", form.Namespace);
             else
                 dbContent = FileHelper.ReadFile(path);
@@ -96,7 +96,7 @@ namespace XCZ.CodeBuild
         {
             string dbContent;
             string path = $@"{parentPath}{sysPathSeparator}{form.Namespace}.EntityFrameworkCore{sysPathSeparator}EntityFrameworkCore{sysPathSeparator}{form.Namespace}DbContextModelCreatingExtensions.cs";
-            if (!FileHelper.DirectoryExists(path))
+            if (!FileHelper.FileExists(path))
                 dbContent = CodeBuildTemplate.DbContextModelCreatingExtensionsClassTemplate.Replace("{Namespace}", form.Namespace);
             else
                 dbContent = FileHelper.ReadFile(path);

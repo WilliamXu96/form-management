@@ -8,9 +8,8 @@ namespace {Namespace}.EntityFrameworkCore
     [ConnectionStringName("{Namespace}")]
     public class {Namespace}DbContext : AbpDbContext<{Namespace}DbContext>
     {
-        public DbSet<Book> Book { get; set; }
-
         //Code generation...
+
         public {Namespace}DbContext(DbContextOptions<{Namespace}DbContext> options)
             : base(options)
         {
