@@ -84,31 +84,17 @@ namespace XCZ.FormBuildManagement
             form.TableName = input.TableName;
             form.Remark = input.Remark;
 
-            await _fieldRep.DeleteAsync(_ => _.FormId == id);
-            foreach (var field in input.Fields)
+            var fields = await _fieldRep.GetListAsync(_ => _.FormId == id);
+            foreach (var field in fields)
             {
-                await _fieldRep.InsertAsync(new FormField(GuidGenerator.Create())
-                {
-                    TenantId = CurrentTenant.Id,
-                    FormId = id,
-                    FieldType = field.FieldType,
-                    DataType = field.DataType,
-                    FieldName = field.FieldName,
-                    Label = field.Label,
-                    Placeholder = field.Placeholder,
-                    DefaultValue = field.DefaultValue,
-                    FieldOrder = field.FieldOrder,
-                    Icon = field.Icon,
-                    Maxlength = field.Maxlength,
-                    IsReadonly = field.IsReadonly,
-                    IsRequired = field.IsRequired,
-                    IsIndex = field.IsIndex,
-                    IsSort = field.IsSort,
-                    Disabled = field.Disabled,
-
-                });
+                var i = input.Fields.First(_ => _.Id == field.Id);
+                field.Label = i.Label;
+                field.DataType = i.DataType;
+                field.IsReadonly = i.IsReadonly;
+                field.IsRequired = i.IsRequired;
+                field.IsIndex = i.IsIndex;
             }
-
+            await _fieldRep.UpdateManyAsync(fields);
             return ObjectMapper.Map<Form, FormBuildDto>(form);
         }
 
