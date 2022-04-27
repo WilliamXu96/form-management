@@ -18,6 +18,7 @@
             public const string Build = Default + ".Build";
             public const string Update = Default + ".Update";
             public const string Create = Default + ".Create";
+            public const string Download = Default + ".Download";
         }
     }
 }

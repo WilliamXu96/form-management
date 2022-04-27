@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -12,7 +13,7 @@ namespace XCZ.FormBuildManagement
     [RemoteService]
     [Area("business")]
     [Route("api/business/build")]
-    public class FormBuildController : AbpController, IFormBuildAppService
+    public class FormBuildController : AbpController
     {
         private readonly IFormBuildAppService _formBuildAppService;
 
@@ -26,6 +27,17 @@ namespace XCZ.FormBuildManagement
         public Task Build(Guid id)
         {
             return _formBuildAppService.Build(id);
+        }
+
+        [HttpGet]
+        [Route("download/{id}")]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var file = await _formBuildAppService.Download(id);
+            return new FileContentResult(System.IO.File.ReadAllBytes(file), "application/zip")
+            {
+                FileDownloadName = Path.GetFileName(file)
+            };
         }
 
         [HttpGet]

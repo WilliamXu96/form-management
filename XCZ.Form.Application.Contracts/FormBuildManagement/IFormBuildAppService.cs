@@ -16,5 +16,7 @@ namespace XCZ.FormBuildManagement
         Task<FormBuildDto> Get(Guid id);
 
         Task Build(Guid id);
+
+        Task<string> Download(Guid id);
     }
 }

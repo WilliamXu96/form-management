@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ using XCZ.FormBuildManagement.Dto;
 using XCZ.FormManagement;
 using XCZ.FormManagement.Dto;
 using XCZ.Permissions;
+using XCZ.Utilities;
 
 namespace XCZ.FormBuildManagement
 {
@@ -25,7 +27,7 @@ namespace XCZ.FormBuildManagement
     {
         private readonly IRepository<Form, Guid> _formRep;
         private readonly IRepository<FormField, Guid> _fieldRep;
-        private IWebHostEnvironment _hostingEnvironment;
+        private IWebHostEnvironment _hostEnvironment;
 
         public FormBuildAppService(
             IRepository<Form, Guid> formRep,
@@ -34,19 +36,37 @@ namespace XCZ.FormBuildManagement
         {
             _formRep = formRep;
             _fieldRep = columnRep;
-            _hostingEnvironment = hostingEnvironment;
+            _hostEnvironment = hostingEnvironment;
         }
 
         [Authorize(FormPermissions.FormBuild.Build)]
         public async Task Build(Guid id)
         {
-            if (!_hostingEnvironment.IsDevelopment())
+            if (!_hostEnvironment.IsDevelopment())
                 throw new BusinessException("仅限开发环境使用！");
 
             var form = await _formRep.GetAsync(id);
             var fields = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == form.Id).ToListAsync();
-            var parentPath = new DirectoryInfo(_hostingEnvironment.ContentRootPath).Parent.FullName;
+            var parentPath = new DirectoryInfo(_hostEnvironment.ContentRootPath).Parent.FullName;
             new CodeBuild.CodeBuildHelper(form, fields, parentPath, SystemSymbolHelper.GetSysPathSeparator(), SystemSymbolHelper.GetSysLineFeed()).Build();
+        }
+
+        [Authorize(FormPermissions.FormBuild.Download)]
+        public async Task<string> Download(Guid id)
+        {
+            var form = await _formRep.GetAsync(id);
+            var fields = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == form.Id).ToListAsync();
+            //TODO：path验证
+            var parentPath = Path.Combine(_hostEnvironment.WebRootPath, form.Namespace);
+            var file = parentPath + ".zip";
+            //TODO：删除
+            new CodeBuild.CodeBuildHelper(form, fields, parentPath, SystemSymbolHelper.GetSysPathSeparator(), SystemSymbolHelper.GetSysLineFeed()).Build();
+            if(FileHelper.FileExists(file))
+            {
+                FileHelper.FileDel(file);
+            }
+            ZipFile.CreateFromDirectory(parentPath, file, CompressionLevel.Fastest, true);
+            return file;
         }
 
         public async Task<FormBuildDto> Get(Guid id)

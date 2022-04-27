@@ -5,9 +5,9 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.Application.Contracts</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
-    <Description>功能增强：非Business命名空间，自动生成新路径代码文件</Description>
+    <Description>功能增强：提供生成代码下载</Description>
   </PropertyGroup>
 
   <ItemGroup>

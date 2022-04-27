@@ -20,6 +20,7 @@ namespace XCZ.Permissions
             var formBuild = formManagement.AddPermission(FormPermissions.FormBuild.Default, L("代码生成"));
             formBuild.AddChild(FormPermissions.FormBuild.Update, L("Edit"));
             formBuild.AddChild(FormPermissions.FormBuild.Build, L("生成"));
+            formBuild.AddChild(FormPermissions.FormBuild.Download, L("下载"));
             formBuild.AddChild(FormPermissions.FormBuild.Create, L("Create"));
         }
 
