@@ -45,6 +45,17 @@ namespace XCZ.EntityFrameworkCore
                 b.Property(x => x.IsIndex).HasDefaultValue(false);
                 b.Property(x => x.Span).HasDefaultValue(24);
             });
+
+            builder.Entity<FormFieldOption>(b =>
+            {
+                b.ToTable("base_form_fields_opts");
+
+                b.ConfigureConcurrencyStamp();
+                b.ConfigureExtraProperties();
+
+                b.Property(x => x.Label).IsRequired().HasMaxLength(200);
+                b.Property(x => x.Value).IsRequired().HasMaxLength(200);
+            });
         }
     }
 }

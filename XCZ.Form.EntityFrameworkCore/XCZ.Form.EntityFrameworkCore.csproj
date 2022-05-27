@@ -5,7 +5,7 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.EntityFrameworkCore</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>
 		功能增强：提供生成代码下载

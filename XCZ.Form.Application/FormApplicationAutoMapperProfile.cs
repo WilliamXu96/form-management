@@ -14,6 +14,7 @@ namespace XCZ
                 .Ignore(dto => dto.Fields);
             CreateMap<Form, FormBuildDto>();
             CreateMap<FormField, FormFieldDto>();
+            CreateMap<FormFieldOption, FieldOption>();
         }
     }
 }

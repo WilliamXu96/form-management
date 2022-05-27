@@ -19,52 +19,24 @@ namespace XCZ.FormManagement
     {
         private readonly IRepository<Form, Guid> _formRep;
         private readonly IRepository<FormField, Guid> _columnRep;
+        private readonly IRepository<FormFieldOption, Guid> _fieldOptRep;
 
         public FormAppService(
             IRepository<Form, Guid> formRep,
-            IRepository<FormField, Guid> columnRep)
+            IRepository<FormField, Guid> columnRep,
+            IRepository<FormFieldOption, Guid> fieldOptRep)
         {
             _formRep = formRep;
             _columnRep = columnRep;
+            _fieldOptRep = fieldOptRep;
         }
 
         [Authorize(FormPermissions.Form.Create)]
         public async Task<FormDto> Create(CreateOrUpdateFormDto input)
         {
             var id = GuidGenerator.Create();
-            var form = await _formRep.InsertAsync(new Form(id,
-                                                           CurrentTenant.Id,
-                                                           input.Api,
-                                                           input.FormName,
-                                                           input.DisplayName,
-                                                           input.Description,
-                                                           input.Disabled));
-
-            foreach (var field in input.Fields)
-            {
-                await _columnRep.InsertAsync(new FormField(GuidGenerator.Create())
-                {
-                    TenantId = CurrentTenant.Id,
-                    FormId = id,
-                    FieldType = field.FieldType,
-                    DataType = StringExtension.ToColumnType(field.FieldType),
-                    FieldName = field.FieldName,
-                    Label = field.Label,
-                    Placeholder = field.Placeholder,
-                    DefaultValue = field.DefaultValue,
-                    FieldOrder = field.FieldOrder,
-                    Icon = field.Icon,
-                    Maxlength = field.Maxlength,
-                    IsReadonly = field.IsReadonly,
-                    IsRequired = field.IsRequired,
-                    IsIndex = field.IsIndex,
-                    IsSort = field.IsSort,
-                    Disabled = field.Disabled,
-                    Span = field.Span,
-                    Regx = field.Regx
-                });
-            }
-
+            var form = await _formRep.InsertAsync(new Form(id, CurrentTenant.Id, input.Api, input.FormName, input.DisplayName, input.Description, input.Disabled));
+            await FieldInsert(id, input.Fields);
             return ObjectMapper.Map<Form, FormDto>(form);
         }
 
@@ -84,9 +56,14 @@ namespace XCZ.FormManagement
             var columns = await (await _columnRep.GetQueryableAsync()).Where(_ => _.FormId == id)
                                           .OrderBy(_ => _.FieldOrder)
                                           .ToListAsync();
-
+            var opts = await _fieldOptRep.GetListAsync(_ => _.FormId == id);
             var dto = ObjectMapper.Map<Form, FormDto>(form);
             dto.Fields = ObjectMapper.Map<List<FormField>, List<FormFieldDto>>(columns);
+            foreach (var f in dto.Fields)
+            {
+                var opt = opts.Where(_ => _.FormFieldId == f.Id).ToList();
+                if (opt.Any()) f.Options = ObjectMapper.Map<List<FormFieldOption>, List<FieldOption>>(opt);
+            }
             return dto;
         }
 
@@ -115,31 +92,8 @@ namespace XCZ.FormManagement
             form.Description = input.Description;
 
             await _columnRep.DeleteAsync(_ => _.FormId == id);
-            foreach (var field in input.Fields)
-            {
-                await _columnRep.InsertAsync(new FormField(GuidGenerator.Create())
-                {
-                    TenantId = CurrentTenant.Id,
-                    FormId = id,
-                    FieldType = field.FieldType,
-                    DataType = StringExtension.ToColumnType(field.FieldType),
-                    FieldName = field.FieldName,
-                    Label = field.Label,
-                    Placeholder = field.Placeholder,
-                    DefaultValue = field.DefaultValue,
-                    FieldOrder = field.FieldOrder,
-                    Icon = field.Icon,
-                    Maxlength = field.Maxlength,
-                    IsReadonly = field.IsReadonly,
-                    IsRequired = field.IsRequired,
-                    IsIndex = field.IsIndex,
-                    IsSort = field.IsSort,
-                    Disabled = field.Disabled,
-                    Span = field.Span,
-                    Regx = field.Regx
-                });
-            }
-
+            await _fieldOptRep.DeleteAsync(_ => _.FormId == id);
+            await FieldInsert(id, input.Fields);
             return ObjectMapper.Map<Form, FormDto>(form);
         }
 
@@ -166,6 +120,41 @@ namespace XCZ.FormManagement
                                   Label = c.Label
                               }).ToListAsync();
             return new ListResultDto<FormFieldListDto>(list);
+        }
+
+        private async Task FieldInsert(Guid pid, List<Field> fields)
+        {
+            foreach (var field in fields)
+            {
+                var id = GuidGenerator.Create();
+                await _columnRep.InsertAsync(new FormField(id)
+                {
+                    TenantId = CurrentTenant.Id,
+                    FormId = pid,
+                    FieldType = field.FieldType,
+                    DataType = StringExtension.ToColumnType(field.FieldType),
+                    FieldName = field.FieldName,
+                    Label = field.Label,
+                    Placeholder = field.Placeholder,
+                    DefaultValue = field.DefaultValue,
+                    FieldOrder = field.FieldOrder,
+                    Icon = field.Icon,
+                    Maxlength = field.Maxlength,
+                    IsReadonly = field.IsReadonly,
+                    IsRequired = field.IsRequired,
+                    IsIndex = field.IsIndex,
+                    IsSort = field.IsSort,
+                    Disabled = field.Disabled,
+                    Span = field.Span,
+                    Regx = field.Regx
+                });
+                if (field.Options != null) await OptionInsert(pid, id, field.Options);
+            }
+        }
+
+        private async Task OptionInsert(Guid fid, Guid ffid, List<FieldOption> opts)
+        {
+            foreach (var o in opts) { await _fieldOptRep.InsertAsync(new FormFieldOption(GuidGenerator.Create()) { FormId = fid, FormFieldId = ffid, Label = o.Label, Value = o.Value }); }
         }
     }
 }

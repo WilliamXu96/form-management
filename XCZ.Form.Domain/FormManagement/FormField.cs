@@ -48,8 +48,6 @@ namespace XCZ.FormManagement
 
         public string Regx { get; set; }
 
-        public string Options { get; set; }
-
         /// <summary>
         /// 布局时表单占用的栅格数
         /// XiangMingHuii

@@ -15,5 +15,10 @@ namespace XCZ.FormManagement
         public string Label { get; set; }
 
         public string Value { get; set; }
+
+        public FormFieldOption(Guid id) : base(id)
+        {
+
+        }
     }
 }

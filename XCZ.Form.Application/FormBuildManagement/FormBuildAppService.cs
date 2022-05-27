@@ -72,10 +72,7 @@ namespace XCZ.FormBuildManagement
         public async Task<FormBuildDto> Get(Guid id)
         {
             var form = await _formRep.GetAsync(id);
-            var columns = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == id)
-                                         .OrderBy(_ => _.FieldOrder)
-                                         .ToListAsync();
-
+            var columns = await (await _fieldRep.GetQueryableAsync()).Where(_ => _.FormId == id).OrderBy(_ => _.FieldOrder).ToListAsync();
             var dto = ObjectMapper.Map<Form, FormBuildDto>(form);
             dto.Fields = ObjectMapper.Map<List<FormField>, List<FormFieldDto>>(columns);
             return dto;
@@ -84,13 +81,8 @@ namespace XCZ.FormBuildManagement
         public async Task<PagedResultDto<FormBuildDto>> GetAll(GetFormInputDto input)
         {
             var query = (await _formRep.GetQueryableAsync()).WhereIf(!string.IsNullOrWhiteSpace(input.Filter), _ => _.FormName.Contains(input.Filter));
-
             var totalCount = await query.CountAsync();
-            var items = await query.OrderBy(input.Sorting ?? "FormName")
-                                   .Skip(input.SkipCount)
-                                   .Take(input.MaxResultCount)
-                                   .ToListAsync();
-
+            var items = await query.OrderBy(input.Sorting ?? "FormName").Skip(input.SkipCount).Take(input.MaxResultCount).ToListAsync();
             var dto = ObjectMapper.Map<List<Form>, List<FormBuildDto>>(items);
             return new PagedResultDto<FormBuildDto>(totalCount, dto);
         }
@@ -103,7 +95,6 @@ namespace XCZ.FormBuildManagement
             form.EntityName = input.EntityName;
             form.TableName = input.TableName;
             form.Remark = input.Remark;
-
             var fields = await _fieldRep.GetListAsync(_ => _.FormId == id);
             foreach (var field in fields)
             {

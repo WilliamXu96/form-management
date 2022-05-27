@@ -5,7 +5,7 @@
     <RootNamespace>XCZ</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyName>XCZ.FormManagement.Domain</AssemblyName>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>功能增强：提供生成代码下载</Description>
     <Company />
@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="5.0.0" />
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.0.0" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.1.4" />
   </ItemGroup>
 
 </Project>

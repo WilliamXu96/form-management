@@ -12,6 +12,8 @@ namespace XCZ.EntityFrameworkCore
 
         public DbSet<FormField> FormFields { get; set; }
 
+        public DbSet<FormFieldOption> FormFieldOptions { get; set; }
+
         public FormDbContext(DbContextOptions<FormDbContext> options) : base(options)
         {
 
