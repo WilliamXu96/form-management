@@ -56,6 +56,13 @@ namespace XCZ.EntityFrameworkCore
                 b.Property(x => x.Label).IsRequired().HasMaxLength(200);
                 b.Property(x => x.Value).IsRequired().HasMaxLength(200);
             });
+
+            builder.Entity<FormData>(b =>
+            {
+                b.ToTable("base_form_datas");
+
+                b.ConfigureByConvention();
+            });
         }
     }
 }

@@ -3,6 +3,7 @@ using Volo.Abp.AutoMapper;
 using XCZ.FormManagement.Dto;
 using XCZ.FormManagement;
 using XCZ.FormBuildManagement.Dto;
+using XCZ.FormDataManagement.Dto;
 
 namespace XCZ
 {
@@ -15,6 +16,7 @@ namespace XCZ
             CreateMap<Form, FormBuildDto>();
             CreateMap<FormField, FormFieldDto>();
             CreateMap<FormFieldOption, FieldOption>();
+            CreateMap<FormData, FormDataDto>();
         }
     }
 }
