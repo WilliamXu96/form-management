@@ -32,5 +32,26 @@ namespace XCZ.FormDataManagement
         {
             return _formDataAppService.GetAll(input);
         }
+
+        [HttpPost]
+        [Route("delete")]
+        public Task Delete(List<Guid> ids)
+        {
+            return _formDataAppService.Delete(ids);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public Task<FormDataDto> Update(Guid id, CreateOrUpdateFormDataDto input)
+        {
+            return _formDataAppService.Update(id, input);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public Task<Dictionary<string, string>> Get(Guid id)
+        {
+            return _formDataAppService.Get(id);
+        }
     }
 }

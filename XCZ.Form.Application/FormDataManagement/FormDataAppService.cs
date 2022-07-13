@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -34,6 +35,19 @@ namespace XCZ.FormDataManagement
             return ObjectMapper.Map<FormData, FormDataDto>(result);
         }
 
+        public async Task<Dictionary<string, string>> Get(Guid id)
+        {
+            var formData = await _repository.GetAsync(id);
+            var dataItems = JsonConvert.DeserializeObject<List<FormDataItemDto>>(formData.Data);
+            var result = new Dictionary<string, string>();
+            result.Add("id", formData.Id.ToString());
+            foreach (var dataItem in dataItems)
+            {
+                result.Add(dataItem.fieldName, dataItem.value);
+            }
+            return result;
+        }
+
         public async Task<PagedResultDto<Dictionary<string, string>>> GetAll(GetFormDataInputDto input)
         {
             var query = (await _repository.GetQueryableAsync()).Where(_ => _.FormId == input.FormId);
@@ -57,6 +71,23 @@ namespace XCZ.FormDataManagement
                 resultData.Add(dic);
             }
             return new PagedResultDto<Dictionary<string, string>>(totalCount, resultData);
+        }
+
+        public async Task Delete(List<Guid> ids)
+        {
+            foreach (var id in ids)
+            {
+                await _repository.DeleteAsync(id);
+            }
+        }
+
+        public async Task<FormDataDto> Update(Guid id, CreateOrUpdateFormDataDto input)
+        {
+            var result = await _repository.GetAsync(id);
+            if (result.FormId != input.FormId) throw new BusinessException("修改失败：表单数据异常");
+            var data = JsonConvert.SerializeObject(input.Data);
+            result.Data = data;
+            return ObjectMapper.Map<FormData, FormDataDto>(result);
         }
     }
 }

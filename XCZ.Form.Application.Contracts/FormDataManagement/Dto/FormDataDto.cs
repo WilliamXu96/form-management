@@ -8,6 +8,6 @@ namespace XCZ.FormDataManagement.Dto
 
         public Guid FormId { get; set; }
 
-        public string Data { get; set; }
+        //public string Data { get; set; }
     }
 }
