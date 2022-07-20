@@ -50,7 +50,8 @@ namespace XCZ.FormDataManagement
 
         public async Task<PagedResultDto<Dictionary<string, string>>> GetAll(GetFormDataInputDto input)
         {
-            var query = (await _repository.GetQueryableAsync()).Where(_ => _.FormId == input.FormId);
+            var query = (await _repository.GetQueryableAsync()).Where(_ => _.FormId == input.FormId)
+                                                               .WhereIf(!input.Filter.IsNullOrWhiteSpace(), _ => _.Data.Contains(input.Filter));
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(input.Sorting ?? "CreationTime DESC")
