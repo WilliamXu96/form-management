@@ -5,7 +5,7 @@
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.Application.Contracts</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.3</Version>
+    <Version>2.3.0</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>功能增强：实现动态表单CRUD</Description>
   </PropertyGroup>
@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Localization" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.Localization" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
