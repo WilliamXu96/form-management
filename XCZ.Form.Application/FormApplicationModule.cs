@@ -1,6 +1,5 @@
 ﻿using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
 namespace XCZ
@@ -18,14 +17,6 @@ namespace XCZ
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<FormApplicationModule>();
-            });
-        }
-
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
-            PreConfigure<AbpJsonOptions>(option =>
-            {
-                option.UseHybridSerializer = false;
             });
         }
     }

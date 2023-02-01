@@ -10,7 +10,7 @@ namespace XCZ.Permissions
 
         public override void Define(IPermissionDefinitionContext context)
         {
-            var formManagement = context.AddGroup(FormPermissions.FormManagement, L("表单管理"), MultiTenancySides.Tenant);
+            var formManagement = context.AddGroup(FormPermissions.FormManagement, L("表单管理"));
 
             var form=formManagement.AddPermission(FormPermissions.Form.Default, L("表单"));
             form.AddChild(FormPermissions.Form.Update, L("Edit"));

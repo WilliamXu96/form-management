@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>XCZ</RootNamespace>
     <AssemblyName>XCZ.FormManagement.EntityFrameworkCore</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.3.0</Version>
+    <Version>3.0.0</Version>
     <Authors>XCZ、wycomcom、安眠药</Authors>
     <Description>
 		功能增强：实现动态表单CRUD

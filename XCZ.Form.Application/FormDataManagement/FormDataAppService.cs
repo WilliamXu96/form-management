@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -26,7 +26,7 @@ namespace XCZ.FormDataManagement
 
         public async Task<FormDataDto> Create(CreateOrUpdateFormDataDto input)
         {
-            var data = JsonConvert.SerializeObject(input.Data);
+            var data = JsonSerializer.Serialize(input.Data);
             var result = await _repository.InsertAsync(new FormData(GuidGenerator.Create())
             {
                 FormId = input.FormId,
@@ -38,7 +38,7 @@ namespace XCZ.FormDataManagement
         public async Task<Dictionary<string, string>> Get(Guid id)
         {
             var formData = await _repository.GetAsync(id);
-            var dataItems = JsonConvert.DeserializeObject<List<FormDataItemDto>>(formData.Data);
+            var dataItems = JsonSerializer.Deserialize<List<FormDataItemDto>>(formData.Data);
             var result = new Dictionary<string, string>();
             result.Add("id", formData.Id.ToString());
             foreach (var dataItem in dataItems)
@@ -62,7 +62,7 @@ namespace XCZ.FormDataManagement
             var resultData = new List<Dictionary<string, string>>();
             foreach (var item in items)
             {
-                var dataItems = JsonConvert.DeserializeObject<List<FormDataItemDto>>(item.Data);
+                var dataItems = JsonSerializer.Deserialize<List<FormDataItemDto>>(item.Data);
                 var dic = new Dictionary<string, string>();
                 dic.Add("id", item.Id.ToString());
                 foreach (var dataItem in dataItems)
@@ -86,7 +86,7 @@ namespace XCZ.FormDataManagement
         {
             var result = await _repository.GetAsync(id);
             if (result.FormId != input.FormId) throw new BusinessException("修改失败：表单数据异常");
-            var data = JsonConvert.SerializeObject(input.Data);
+            var data = JsonSerializer.Serialize(input.Data);
             result.Data = data;
             return ObjectMapper.Map<FormData, FormDataDto>(result);
         }
